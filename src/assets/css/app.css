@@ -1,0 +1,39 @@
+body{
+    overflow: hidden;
+}
+.max-h-75{
+    max-height: 75vh;
+}
+::-webkit-scrollbar-button {
+    background-color: #464d5a;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-corner {
+    background-color: #464d5a;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #2d71b1;
+}
+::-webkit-scrollbar-track {
+    background-color: #464d5a;
+}
+.tab-active a{
+    background: #fff;
+    color: #3182ce;
+}
+.custom-modal-succes{
+    width: 400px;
+    height: 80px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .7s;
+    will-change: opacity;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0
+}
