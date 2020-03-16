@@ -456,6 +456,67 @@
         }
       ],
       "id": 9
+    },
+    {
+      "date": "2020-03-16",
+      "data": [
+        {
+          "id": 1,
+          "clock_in": "10:16:54",
+          "clock_out": ""
+        },
+        {
+          "id": 2,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 3,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 4,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 5,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 7,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 8,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 9,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 10,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 11,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 12,
+          "clock_in": "",
+          "clock_out": ""
+        }
+      ],
+      "id": 12
     }
   ],
   "data_leave_reaquest": [
@@ -571,6 +632,26 @@
       ],
       "notes": "Mau izin dong ke kamar mandi",
       "status": 0
+    },
+    {
+      "id": 11,
+      "name": "Shincan",
+      "id_employee": 1,
+      "leave_date": [
+        "2020-03-16"
+      ],
+      "notes": "Hari ini",
+      "status": 1
+    },
+    {
+      "id": 12,
+      "name": "Shincan",
+      "id_employee": 1,
+      "leave_date": [
+        "2020-03-16"
+      ],
+      "notes": "Okeyy",
+      "status": 2
     }
   ],
   "data_applicant": [

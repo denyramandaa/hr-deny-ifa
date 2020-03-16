@@ -104,7 +104,7 @@ export default {
             return this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0] ? this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0].data.filter(d=>d.clock_in != "").length : ""
         },
         getOutToday(){
-            return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()))
+            return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)
         },
     },
     methods:{

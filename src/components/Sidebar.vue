@@ -35,7 +35,7 @@ export default{
           url: 'applicants',
           icon: 'fa-paperclip'
         },{
-          name: 'Leave Reaquest',
+          name: 'Leave Request',
           url: 'leave_reaquest',
           icon: 'fa-plane-departure'
         }
