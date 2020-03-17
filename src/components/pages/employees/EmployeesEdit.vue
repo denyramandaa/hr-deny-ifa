@@ -115,9 +115,9 @@ export default {
   },
   computed:{
     ...mapGetters({
-        employee: 'employee',
-        roleJob: 'roleJob',
-        employeeStatus: 'employeeStatus'
+        employee: 'employee/employee',
+        roleJob: 'employee/roleJob',
+        employeeStatus: 'employee/employeeStatus'
     }),
     getTheUser(){
       return this.employee.find(ob=>ob.id === this.id);
@@ -125,11 +125,11 @@ export default {
   },
   methods:{
     ...mapActions({
-        fetchEmployees : 'fetchEmployees',
-        fetchRoleJob : 'fetchRoleJob',
-        fetchEmployeeStatus : 'fetchEmployeeStatus',
-        editedEmployee: 'editedEmployee',
-        deleteEmployee: 'deleteEmployee'
+        fetchEmployees : 'employee/fetchEmployees',
+        fetchRoleJob : 'employee/fetchRoleJob',
+        fetchEmployeeStatus : 'employee/fetchEmployeeStatus',
+        editedEmployee: 'employee/editedEmployee',
+        deleteEmployee: 'employee/deleteEmployee'
     }),
     deleteEmp(){
       this.addDeleteSucces = true;

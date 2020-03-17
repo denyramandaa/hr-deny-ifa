@@ -55,8 +55,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      leaveReaquest: 'leaveReaquest',
-      employee: 'employee',
+      leaveReaquest: 'leaveRequest/leaveReaquest',
+      employee: 'employee/employee',
     }),
     getEmployeeName(){
       return this.employee.find(ob=>ob.id == parseInt(this.$cookies.get('local_login'))).name
@@ -83,8 +83,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      addLeaveReaquest: 'addLeaveReaquest',
-      fetchEmployees : 'fetchEmployees',
+      addLeaveReaquest: 'leaveRequest/addLeaveReaquest',
+      fetchEmployees : 'employee/fetchEmployees',
     }),
     add(){
       let last_id = (this.leaveReaquest[this.leaveReaquest.length-1].id) ? (this.leaveReaquest[this.leaveReaquest.length-1].id) : 0;

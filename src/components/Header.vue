@@ -33,7 +33,7 @@
     },
     computed:{
       ...mapGetters({
-          employee: 'employee',
+          employee: 'employee/employee',
       }),
       getUser(){
         return this.$cookies.get('local_login') && this.employee.find(ob=>ob.id == this.$cookies.get('local_login')) ? this.employee.find(ob=>ob.id == this.$cookies.get('local_login')).name : 'user'
@@ -41,7 +41,7 @@
     },
     methods:{
       ...mapActions({
-        fetchEmployees : 'fetchEmployees',
+        fetchEmployees : 'employee/fetchEmployees',
       }),
       logOut(){
         this.$cookies.remove('local_login');

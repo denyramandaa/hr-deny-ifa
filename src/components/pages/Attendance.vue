@@ -41,14 +41,14 @@ export default {
     },
     computed:{
         ...mapGetters({
-            employee: 'employee',
-            attendanceList: 'attendanceList'
+            employee: 'employee/employee',
+            attendanceList: 'attendance/attendanceList'
         }),
     },
     methods: {
         ...mapActions({
-            fetchEmployees: 'fetchEmployees',
-            fetchAttendanceList: 'fetchAttendanceList'
+            fetchEmployees: 'employee/fetchEmployees',
+            fetchAttendanceList: 'attendance/fetchAttendanceList'
         }),
         getClockIn(date, id){
             return this.attendanceList.find(ob=>ob.date === date).data.find(d=>d.id == id) && this.attendanceList.find(ob=>ob.date === date).data.find(d=>d.id == id).clock_in ? this.attendanceList.find(ob=>ob.date === date).data.find(d=>d.id == id).clock_in : '-'

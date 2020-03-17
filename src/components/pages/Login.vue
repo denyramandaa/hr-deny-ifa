@@ -45,7 +45,7 @@
     },
     computed: {
       ...mapGetters({
-        employee: 'employee',
+        employee: 'employee/employee',
       }),
     },
     beforeRouteEnter(to, from, next) {

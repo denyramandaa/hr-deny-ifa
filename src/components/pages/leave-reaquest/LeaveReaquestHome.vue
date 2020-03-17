@@ -34,8 +34,8 @@
                             <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Status</th>
                             <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center"></th>
                         </tr>
-                        <tr class="hover:bg-gray-100" v-for="(item, idx) in getLeaveReaquest" :key="idx" v-if="getEmployee(item)">
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                        <tr class="hover:bg-gray-100" v-for="(item, idx) in getLeaveReaquest" :key="idx">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
                                         <img :src="checkingImg(getEmployee(item))" alt="" class="rounded-full">
@@ -98,9 +98,9 @@ export default {
     },
     computed:{
         ...mapGetters({
-            employee: 'employee',
-            leaveReaquest: 'leaveReaquest',
-            roleJob: 'roleJob',
+            employee: 'employee/employee',
+            leaveReaquest: 'leaveRequest/leaveReaquest',
+            roleJob: 'employee/roleJob',
         }),
         getLeaveReaquest(){
             return this.filterName === '' ? this.leaveReaquest.filter(ob=>ob.status === this.activeIdx) : this.leaveReaquest.filter(ob=>ob.status === this.activeIdx && ob.name.includes(this.filterName));
@@ -108,9 +108,9 @@ export default {
     },
     methods:{
         ...mapActions({
-            fetchEmployees : 'fetchEmployees',
-            fetchLeaveReaquest : 'fetchLeaveReaquest',
-            fetchRoleJob : 'fetchRoleJob',
+            fetchEmployees : 'employee/fetchEmployees',
+            fetchLeaveReaquest : 'leaveRequest/fetchLeaveReaquest',
+            fetchRoleJob : 'employee/fetchRoleJob',
         }),
         getEmployee(dta){
             return this.employee.find(ob=>ob.id === dta.id_employee);

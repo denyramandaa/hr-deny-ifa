@@ -19,18 +19,18 @@ export default {
     },
     computed: {
         ...mapGetters({
-            attendanceList: 'attendanceList'
+            attendanceList: 'attendance/attendanceList'
         })
     },
     methods:{
         ...mapActions({
-            fetchDateEvent : 'fetchDateEvent',
-            fetchEmployees : 'fetchEmployees',
-            fetchRoleJob : 'fetchRoleJob',
-            fetchEmployeeStatus : 'fetchEmployeeStatus',
-            fetchAttendanceList: 'fetchAttendanceList',
-            addAttendance: 'addAttendance',
-            fetchLeaveReaquest: 'fetchLeaveReaquest'
+            fetchDateEvent : 'event/fetchDateEvent',
+            fetchEmployees : 'employee/fetchEmployees',
+            fetchRoleJob : 'employee/fetchRoleJob',
+            fetchEmployeeStatus : 'employee/fetchEmployeeStatus',
+            fetchAttendanceList: 'attendance/fetchAttendanceList',
+            addAttendance: 'attendance/addAttendance',
+            fetchLeaveReaquest: 'leaveRequest/fetchLeaveReaquest'
         }),
     },
     async created() {
