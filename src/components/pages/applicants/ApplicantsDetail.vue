@@ -122,9 +122,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      applicantList: 'applicantList',
-      roleJob: 'roleJob',
-      employee: 'employee',
+      applicantList: 'applicant/applicantList',
+      roleJob: 'employee/roleJob',
+      employee: 'employee/employee',
     }),
     getApplicantDetail(){
       return this.applicantList.find(ob=>ob.id === this.id)
@@ -132,12 +132,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      addEmployee: 'addEmployee',
-      fetchEmployees : 'fetchEmployees',
-      fetchApplicant : 'fetchApplicant',
-      fetchRoleJob : 'fetchRoleJob',
-      deleteApplicant: 'deleteApplicant',
-      proccessApplicant: 'proccessApplicant'
+      addEmployee: 'employee/addEmployee',
+      fetchEmployees : 'employee/fetchEmployees',
+      fetchApplicant : 'applicant/fetchApplicant',
+      fetchRoleJob : 'employee/fetchRoleJob',
+      deleteApplicant: 'applicant/deleteApplicant',
+      proccessApplicant: 'applicant/proccessApplicant'
     }),
     getRoleJobPosition(d){
         return this.roleJob.find(ob=>ob.id === d.apply_to) ? this.roleJob.find(ob=>ob.id === d.apply_to).position : ''

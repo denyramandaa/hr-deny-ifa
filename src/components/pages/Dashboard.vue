@@ -76,10 +76,10 @@ export default {
     },
     computed:{
         ...mapGetters({
-            employee: 'employee',
-            dateEvent: 'dateEvent',
-            attendanceList: 'attendanceList',
-            leaveReaquest: 'leaveReaquest',
+            employee: 'employee/employee',
+            dateEvent: 'event/dateEvent',
+            attendanceList: 'attendance/attendanceList',
+            leaveReaquest: 'leaveRequest/leaveReaquest',
         }),
         totalEmploye(){
             return this.employee.length;
@@ -109,11 +109,11 @@ export default {
     },
     methods:{
         ...mapActions({
-            fetchEmployees : 'fetchEmployees',
-            fetchAttendanceList: 'fetchAttendanceList',
-            updateClockIn: 'updateClockIn',
-            updateClockOut: 'updateClockOut',
-            fetchLeaveReaquest : 'fetchLeaveReaquest',
+            fetchEmployees : 'employee/fetchEmployees',
+            fetchAttendanceList: 'attendance/fetchAttendanceList',
+            updateClockIn: 'attendance/updateClockIn',
+            updateClockOut: 'attendance/updateClockOut',
+            fetchLeaveReaquest : 'leaveRequest/fetchLeaveReaquest',
         }),
         checkClock(a){
             return a ? a : '-';

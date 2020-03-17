@@ -123,17 +123,17 @@ export default {
     },
     computed:{
         ...mapGetters({
-            employee: 'employee',
-            roleJob: 'roleJob',
-            employeeStatus: 'employeeStatus'
+            employee: 'employee/employee',
+            roleJob: 'employee/roleJob',
+            employeeStatus: 'employee/employeeStatus'
         })
     },
     methods:{
         ...mapActions({
-            addEmployee: 'addEmployee',
-            fetchEmployees : 'fetchEmployees',
-            fetchRoleJob : 'fetchRoleJob',
-            fetchEmployeeStatus : 'fetchEmployeeStatus'
+            addEmployee: 'employee/addEmployee',
+            fetchEmployees : 'employee/fetchEmployees',
+            fetchRoleJob : 'employee/fetchRoleJob',
+            fetchEmployeeStatus : 'employee/fetchEmployeeStatus'
         }),
         add(){
             let last_id = (this.employee[this.employee.length-1].id) ? (this.employee[this.employee.length-1].id) : 0;

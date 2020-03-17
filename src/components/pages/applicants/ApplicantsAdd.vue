@@ -129,15 +129,15 @@ export default {
     },
     computed:{
         ...mapGetters({
-            applicantList: 'applicantList',
-            roleJob: 'roleJob',
+            applicantList: 'applicant/applicantList',
+            roleJob: 'employee/roleJob',
         })
     },
     methods:{
         ...mapActions({
-            addApplicant: 'addApplicant',
-            fetchApplicant : 'fetchApplicant',
-            fetchRoleJob : 'fetchRoleJob',
+            addApplicant: 'applicant/addApplicant',
+            fetchApplicant : 'applicant/fetchApplicant',
+            fetchRoleJob : 'employee/fetchRoleJob',
         }),
         add(){
             let last_id = (this.applicantList[this.applicantList.length-1].id) ? (this.applicantList[this.applicantList.length-1].id) : 0;

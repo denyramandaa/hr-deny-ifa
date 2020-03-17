@@ -83,8 +83,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      applicantList: 'applicantList',
-      roleJob: 'roleJob',
+      applicantList: 'applicant/applicantList',
+      roleJob: 'employee/roleJob',
     }),
     getApplicant(){
       return this.filterName === '' ? this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx) : this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx && ob.name.includes(this.filterName));
@@ -108,8 +108,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchApplicant : 'fetchApplicant',
-      fetchRoleJob : 'fetchRoleJob',
+      fetchApplicant : 'applicant/fetchApplicant',
+      fetchRoleJob : 'employee/fetchRoleJob',
     }),
     getRoleJobPosition(d){
       return this.roleJob.find(ob=>ob.id === d.apply_to) ? this.roleJob.find(ob=>ob.id === d.apply_to).position : ''
