@@ -187,6 +187,9 @@ export default {
     async created(){
         await this.fetchApplicant();
         await this.fetchRoleJob();
-    }
+    },
+    beforeRouteEnter (to, from, next) {
+        $cookies.get('local_login') ? next({ name: 'add_applicants'}) : next()
+    },
 }
 </script>
