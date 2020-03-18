@@ -24,6 +24,9 @@ const actions = {
   addApplicant({}, payload){
     axios.post('http://localhost:3000/data_applicant', payload);
   },
+  editApplicant({}, payload){
+    axios.put('http://localhost:3000/data_applicant/'+payload.id, payload);
+  },
 }
 
 const mutations = {

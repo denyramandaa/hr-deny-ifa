@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full w-full relative min-h-screen bg-gray-200 overflow-hidden">   
-        <app-header v-if="$cookies.get('local_login')"/>
+    <div class="w-full w-full relative min-h-screen overflow-hidden">   
+        <app-header v-if="page != 'login' && page != 'apply'"/>
         <div class="flex flex-col md:flex-row overflow-hidden">
-            <app-side-bar v-if="$cookies.get('local_login')"/>
+            <app-side-bar v-if="page !== 'login' && page !== 'apply'"/>
             <router-view/>
         </div>
     </div>
@@ -13,9 +13,19 @@ import { mapActions, mapGetters } from 'vuex'
 import AppHeader from './components/Header.vue'
 import AppSideBar from './components/Sidebar.vue'
 export default {
+    data(){
+        return {
+            page: ''
+        }
+    },
     components:{
         AppHeader,
         AppSideBar,
+    },
+    watch:{
+        '$route'(to, from){
+            this.page = to.name;
+        },
     },
     computed: {
         ...mapGetters({
@@ -39,7 +49,8 @@ export default {
         await this.fetchRoleJob();
         await this.fetchEmployeeStatus();
         await this.fetchLeaveReaquest();
-    },
+        this.page = this.$route.name
+    }
 
 }
 </script>

@@ -18,8 +18,10 @@
               <div class="bg-cover bg-center h-full" :style="{ 'background-image': 'url(' + getApplicantDetail.photo + ')' }"></div>
             </div>
             <div class="px-12 py-8 text-center lg:text-left text-gray-700 w-2/3">
-                <h2 class="text-2xl font-bold pt-8 lg:pt-0 capitalize">{{ getApplicantDetail.name }}</h2>
-
+                <div class="flex items-center justify-between">
+                  <h2 class="text-2xl font-bold pt-8 lg:pt-0 capitalize">{{ getApplicantDetail.name }}</h2>
+                  <router-link :to="{name: 'edit_applicants', params: { id: getApplicantDetail.id }}" tag="a">Edit <i class="fas fa-edit cursor-pointer"></i></router-link>
+                </div>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-blue-600 opacity-25"></div>
 
 
@@ -173,6 +175,7 @@ export default {
       this.succesApprove = true;
     },
     async acceptApplicant(){
+      let self = this;
       let last_id = (this.employee[this.employee.length-1].id);
       let new_user = {
           "id" : parseInt(last_id)+1,
@@ -188,7 +191,9 @@ export default {
           "password" : "kompas2020"
       }
       await this.addEmployee(new_user);
-      this.deleteApplicant(this.id);
+      setTimeout(function(){
+        self.deleteApplicant(self.id);
+      },1000);
       this.succesApprove = true;
     }
   },

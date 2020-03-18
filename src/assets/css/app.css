@@ -1,5 +1,6 @@
 body{
     overflow: hidden;
+    background-color: #4a5568;
 }
 .max-h-75{
     max-height: 75vh;

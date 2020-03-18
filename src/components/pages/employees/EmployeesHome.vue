@@ -8,7 +8,7 @@
                 </li>
             </ul>
             <div class="flex justify-end items-center">
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportCsv()">Export CSV</div>
                 <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV (All)</div>
                 <router-link :to="{name: 'add_employees'}" tag="div" class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-sm p-1 px-2 mx-1 rounded"><a>Add New Employee</a></router-link>
             </div>
@@ -104,6 +104,9 @@ export default {
         },
         getEmployeeStatus(a){
             return this.employeeStatus.find(ob=>ob.id == a.status_employee) ? this.employeeStatus.find(ob=>ob.id == a.status_employee).status : ''
+        },
+        exportCsv(){
+            console.log('click');
         }
     },
     data(){
