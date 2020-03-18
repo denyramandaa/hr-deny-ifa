@@ -8,8 +8,8 @@
                 </li>
             </ul>
             <div class="flex justify-end items-center">
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV</div>
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV (All)</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportCSV()">Export CSV</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportAllCSV()">Export CSV (All)</div>
                 <router-link :to="{name: 'add_employees'}" tag="div" class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-sm p-1 px-2 mx-1 rounded"><a>Add New Employee</a></router-link>
             </div>
 
@@ -104,8 +104,82 @@ export default {
         },
         getEmployeeStatus(a){
             return this.employeeStatus.find(ob=>ob.id == a.status_employee) ? this.employeeStatus.find(ob=>ob.id == a.status_employee).status : ''
+        
+        },
+        download_csv(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV FILE
+            csvFile = new Blob([csv], {type: "text/csv"});
+
+            // Download link
+            downloadLink = document.createElement("a");
+
+            // File name
+            downloadLink.download = filename;
+
+            // We have to create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Make sure that the link is not displayed
+            downloadLink.style.display = "none";
+
+            // Add the link to your DOM
+            document.body.appendChild(downloadLink);
+
+            // Lanzamos
+            downloadLink.click();
+        },
+
+        export_table_to_csv(html, filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+            
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (var j = 0; j < cols.length; j++) 
+                    row.push(cols[j].innerText);
+                
+                csv.push(row.join(","));		
+            }
+
+            // Download CSV
+            this.download_csv(csv.join("\n"), filename);
+        },
+        exportCSV(){
+
+            var html = document.querySelector("table").outerHTML;
+            this.export_table_to_csv(html, "table.csv");
+        },
+        exportAllCSV(){
+            const items = this.employee
+            console.log(items);
+            var rows = [];
+
+            for(let i = 0; i< items.length; i++){
+                let row = items[i].id+" , "+items[i].status_employee;
+                rows.push(row);
+            }
+            this.download_csv(csv.join("\n"), filename);
+        },
+        exportAllData(){
+        
+            this.exportAllCSV(html, "table.csv");
         }
-    },
+
+        },           
+            // const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+            // const header = Object.keys(items[0])
+            // let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+            // csv.unshift(header.join(','))
+            // csv = csv.join('\r\n')
+            // this.export_table_to_csv(html, "table.csv");
+
+            // console.log(csv)
+    //     }
+    // },
     data(){
         return{
             activeIdx: 0,
