@@ -20,7 +20,7 @@
           </div>
           <div class="md:w-full shadow bg-gray-100 rounded m-4 text-center">
               <div class="p-4 bg-white rounded-t border-b">Today's Present</div>
-              <div class="text-5xl">{{ getTodayPresent }}<span class="text-gray-400">/{{ totalEmploye }}</span></div>
+              <div class="text-5xl">{{ todayPresents }}<span class="text-gray-400">/{{ totalEmploye }}</span></div>
             <div class="text-gray-500 pb-4">Clock In till {{ getHoursNow() }}</div>
           </div>
         </div>
@@ -73,12 +73,13 @@ export default {
             hasClockIn: false,
             hasClockOut: false,
             dataReady: false,
+            todayPresents: 0
         }
     },
     watch:{
         attendanceList(){
-            console.log('watching', this.attendanceList);
             if(this.attendanceList.find(ob=>ob.date === this.dateLegalFormat())) this.dataReady = true;
+            this.todayPresents = this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0] ? this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0].data.filter(d=>d.clock_in != "").length : 0
         }
     },
     computed:{
@@ -106,9 +107,6 @@ export default {
         },
         getTodayId(){
             return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat())
-        },
-        getTodayPresent(){
-            return this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0] ? this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0].data.filter(d=>d.clock_in != "").length : 0
         },
         getOutToday(){
             return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)
@@ -184,6 +182,7 @@ export default {
                     }
                 }
                 this.hasClockIn = this.getHoursNow();
+                this.todayPresents++;
                 this.updateClockIn(fix);
             }
         },

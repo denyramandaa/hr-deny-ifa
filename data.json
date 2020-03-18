@@ -567,12 +567,11 @@
       "id": 13
     },
     {
-      "id": 14,
       "date": "2020-03-18",
       "data": [
         {
           "id": 1,
-          "clock_in": "",
+          "clock_in": "11:15:01",
           "clock_out": ""
         },
         {
@@ -597,7 +596,7 @@
         },
         {
           "id": 9,
-          "clock_in": "",
+          "clock_in": "11:08:50",
           "clock_out": ""
         },
         {
@@ -610,7 +609,8 @@
           "clock_in": "",
           "clock_out": ""
         }
-      ]
+      ],
+      "id": 14
     }
   ],
   "data_leave_reaquest": [
