@@ -84,7 +84,7 @@ export default {
             employeeStatus: 'employee/employeeStatus'
         }),
         getEmployee(){
-            return this.filterName === '' ? this.employee.filter(ob=>ob.status_employee === this.activeIdx) : this.employee.filter(ob=>ob.status_employee === this.activeIdx && ob.name.includes(this.filterName));
+            return this.filterName === '' ? this.employee.filter(ob=>ob.status_employee === this.activeIdx) : this.employee.filter(ob=>ob.status_employee === this.activeIdx && ob.name.toLowerCase().includes(this.filterName.toLowerCase()));
         }
     },
     methods:{

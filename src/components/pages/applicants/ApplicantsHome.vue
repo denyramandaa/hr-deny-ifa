@@ -87,7 +87,7 @@ export default {
       roleJob: 'employee/roleJob',
     }),
     getApplicant(){
-      return this.filterName === '' ? this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx) : this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx && ob.name.includes(this.filterName));
+      return this.filterName === '' ? this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx) : this.applicantList.filter(ob=>ob.status_applicant === this.activeIdx && ob.name.toLowerCase().includes(this.filterName.toLowerCase()));
     },
   },
   data(){

@@ -13,7 +13,7 @@
               <div class="p-4 bg-white rounded-t border-b text-center">Out Today</div>
               <div class="text-center p-4">
                     <div class="flex justify-center">
-                        <img v-for="item in getOutToday" :key="item.id" :src="getPictureOutToday(item)" alt="" class="rounded-full w-12 -ml-5">
+                        <img v-for="item in getOutToday" :key="item.id" :src="getPictureOutToday(item)" alt="" class="rounded-full -ml-5" style="width: 48px; height: 48px">
                     </div>
                   <div class="text-gray-500 pt-2 text-center">{{ getOutToday.length }} Peoples Take a Leave Today</div>
               </div>
@@ -27,7 +27,7 @@
         <div class="flex flex-col md:flex-row">
           <div class="md:w-full shadow bg-gray-100 rounded m-4">
               <div class="p-4 bg-white rounded-t border-b text-center">Did you absent today?</div>
-              <div class="p-4">
+              <div class="p-4" v-if="dataReady">
                   <p class="text-center mb-4">Don't forget to absent oke</p>
                   <div class="flex justify-center items-center">
                     <div class="text-white cursor-pointer text-lg p-1 px-3 mx-1 rounded" :class="!hasClockIn ? 'bg-green-600' : 'bg-gray-300'" @click="clockIn()">Clock In</div>
@@ -72,6 +72,13 @@ export default {
         return {
             hasClockIn: false,
             hasClockOut: false,
+            dataReady: false,
+        }
+    },
+    watch:{
+        attendanceList(){
+            console.log('watching', this.attendanceList);
+            if(this.attendanceList.find(ob=>ob.date === this.dateLegalFormat())) this.dataReady = true;
         }
     },
     computed:{
@@ -101,7 +108,7 @@ export default {
             return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat())
         },
         getTodayPresent(){
-            return this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0] ? this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0].data.filter(d=>d.clock_in != "").length : ""
+            return this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0] ? this.attendanceList.filter(ob=>ob.date === this.dateLegalFormat())[0].data.filter(d=>d.clock_in != "").length : 0
         },
         getOutToday(){
             return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)

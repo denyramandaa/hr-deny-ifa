@@ -28,19 +28,17 @@ export default {
             fetchEmployees : 'employee/fetchEmployees',
             fetchRoleJob : 'employee/fetchRoleJob',
             fetchEmployeeStatus : 'employee/fetchEmployeeStatus',
-            fetchAttendanceList: 'attendance/fetchAttendanceList',
             addAttendance: 'attendance/addAttendance',
             fetchLeaveReaquest: 'leaveRequest/fetchLeaveReaquest'
         }),
     },
     async created() {
         await this.fetchEmployees();
-        await this.fetchAttendanceList();
+        await this.addAttendance();
         await this.fetchDateEvent();
         await this.fetchRoleJob();
         await this.fetchEmployeeStatus();
         await this.fetchLeaveReaquest();
-        await this.addAttendance();
     },
 
 }

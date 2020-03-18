@@ -103,7 +103,7 @@ export default {
             roleJob: 'employee/roleJob',
         }),
         getLeaveReaquest(){
-            return this.filterName === '' ? this.leaveReaquest.filter(ob=>ob.status === this.activeIdx) : this.leaveReaquest.filter(ob=>ob.status === this.activeIdx && ob.name.includes(this.filterName));
+            return this.filterName === '' ? this.leaveReaquest.filter(ob=>ob.status === this.activeIdx) : this.leaveReaquest.filter(ob=>ob.status === this.activeIdx && ob.name.toLowerCase().includes(this.filterName.toLowerCase()));
         },
     },
     methods:{

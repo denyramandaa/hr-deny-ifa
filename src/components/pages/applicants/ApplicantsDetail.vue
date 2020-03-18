@@ -172,7 +172,7 @@ export default {
       this.proccessApplicant(temp);
       this.succesApprove = true;
     },
-    acceptApplicant(){
+    async acceptApplicant(){
       let last_id = (this.employee[this.employee.length-1].id);
       let new_user = {
           "id" : parseInt(last_id)+1,
@@ -187,9 +187,9 @@ export default {
           "photo" : this.getApplicantDetail.photo,
           "password" : "kompas2020"
       }
-      this.succesApprove = true;
-      this.addEmployee(new_user);
+      await this.addEmployee(new_user);
       this.deleteApplicant(this.id);
+      this.succesApprove = true;
     }
   },
   watch:{
