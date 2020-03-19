@@ -70,10 +70,7 @@
                   </tbody>
                 </table>
             </div>
-            <!-- pagination -->
-            <!-- <div class="flex p-6 border-b border-gray-200 hover:bg-gray-100 flex-wrap">
-
-            </div> -->
+            
         </div>
       </div>
     </div>

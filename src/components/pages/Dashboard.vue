@@ -13,7 +13,7 @@
               <div class="p-4 bg-white rounded-t border-b text-center">Out Today</div>
               <div class="text-center p-4">
                     <div class="flex justify-center">
-                        <img v-for="item in getOutToday" :key="item.id" :src="getPictureOutToday(item)" alt="" class="rounded-full -ml-5" style="width: 48px; height: 48px">
+                        <img v-for="item in getOutToday" :title="item.name" :key="item.id" :src="getPictureOutToday(item)" alt="" class="rounded-full -ml-5" style="width: 48px; height: 48px">
                     </div>
                   <div class="text-gray-500 pt-2 text-center">{{ getOutToday.length }} Peoples Take a Leave Today</div>
               </div>

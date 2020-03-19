@@ -47,17 +47,17 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-gray-500 w-full block normal-case">{{ item.notes }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-gray-900 w-full block capitalize">{{ getRoleJobPosition(getEmployee(item)) }}</div>
                                 <div class="text-sm leading-5 text-gray-500 w-full block capitalize">{{ getRoleJobDivition(getEmployee(item)) }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-center w-full block capitalize p-1 rounded text-white" :class="{ 'bg-gray-400': !item.status, 'bg-green-400': item.status == 1, 'bg-red-400': item.status == 2 }">{{ getStatusText(item.status  ) }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-center">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-center" v-if="getEmployee(item)">
                                 <router-link :to="{name: 'detail_leave_reaquest', params: { id: item.id }}" tag="a"><i class="fas fa-eye cursor-pointer"></i></router-link>
                             </td>
                         </tr>
@@ -69,10 +69,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- pagination -->
-            <!-- <div class="flex p-6 border-b border-gray-200 hover:bg-gray-100 flex-wrap">
-
-            </div> -->
+            
         </div>
       </div>
     </div>
@@ -113,15 +110,19 @@ export default {
             fetchRoleJob : 'employee/fetchRoleJob',
         }),
         getEmployee(dta){
+            if(!dta) return
             return this.employee.find(ob=>ob.id === dta.id_employee);
         },
         getRoleJobPosition(d){
+            if(!d) return
             return this.roleJob.find(ob=>ob.id === d.role_job) ? this.roleJob.find(ob=>ob.id === d.role_job).position : ''
         },
         getRoleJobDivition(d){
+            if(!d) return
             return this.roleJob.find(ob=>ob.id === d.role_job) ? this.roleJob.find(ob=>ob.id === d.role_job).divition : ''
         },
         checkingImg(item){
+            if(!item) return
             return item.photo ? item.photo : '/src/assets/avatar.jpg'
         },
         getStatusText(a){

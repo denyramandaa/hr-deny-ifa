@@ -3,7 +3,7 @@
       <div class="max-w-5xl mx-auto"> 
         <div class="flex justify-end py-4">
             <div class="flex justify-end items-center">
-                <div class="bg-red-600 hover:bg-red-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" @click="deleteEmp()">Delete</div>
+                <div class="bg-red-600 hover:bg-red-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" @click="deleteEmp()" v-if="!isUser()">Delete</div>
                 <div class="bg-green-600 hover:bg-green-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" @click="save()">Save Changes</div>
                 <router-link :to="{name: 'employees'}" tag="div" class="bg-transparent hover:underline cursor-pointer text-white text-base p-1 mx-1 rounded"><a>Cancel</a></router-link>
             </div>
@@ -182,6 +182,9 @@ export default {
             sef.photo = fileLoadedEvent.target.result;
         };
         fileReader.readAsDataURL(fileToLoad);
+    },
+    isUser(){
+      return this.id == this.$cookies.get('local_login')
     }
   },
   watch:{

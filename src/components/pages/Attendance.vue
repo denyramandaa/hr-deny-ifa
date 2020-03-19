@@ -16,8 +16,8 @@
             <div class="flex p-6 border-b border-gray-200 hover:bg-gray-100 flex-wrap" v-for="item in employee" :key="item.id">
                 <div class="items-center w-2/12 capitalize text-left">{{ item.name }}</div>
                 <div class="items-center px-2 w-2/12" v-for="att in attendanceList.slice(attendanceList.length-5,attendanceList.length)" :key="att.date">
-                    <span v-if="activeIdx" :class="getClockOut(att.date, item.id) == '-' ? 'text-red-400' : 'text-green-400'"> {{ getClockOut(att.date, item.id) }} </span>
-                    <span v-else :class="getClockIn(att.date, item.id) == '-' ? 'text-red-400' : 'text-green-400'"> {{ getClockIn(att.date, item.id) }} </span>
+                    <span class="font-bold" v-if="activeIdx" :class="getClockOut(att.date, item.id) == '-' ? 'text-red-500' : 'text-green-500'"> {{ getClockOut(att.date, item.id) }} </span>
+                    <span class="font-bold" v-else :class="getClockIn(att.date, item.id) == '-' ? 'text-red-500' : 'text-green-500'"> {{ getClockIn(att.date, item.id) }} </span>
                 </div>
             </div>
         </div>

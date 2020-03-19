@@ -3,8 +3,8 @@
     <div class="w-full max-w-4xl mx-auto bg-transparent" v-if="getUserDetail && getLeaveReaquest"> 
       <div class="flex justify-end py-4">
           <div class="flex justify-end items-center">
-              <div class="bg-red-600 hover:bg-red-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" v-if="!getLeaveReaquest.status" @click="reject()">Reject</div>
-              <div class="bg-green-600 hover:bg-green-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" v-if="!getLeaveReaquest.status" @click="approve()">Approve</div>
+              <div class="bg-red-600 hover:bg-red-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" v-if="!getLeaveReaquest.status && !isUser()" @click="reject()">Reject</div>
+              <div class="bg-green-600 hover:bg-green-700 text-white cursor-pointer text-base p-1 px-2 mx-1 rounded" v-if="!getLeaveReaquest.status && !isUser()" @click="approve()">Approve</div>
               <router-link :to="{name: 'leave_reaquest'}" tag="div" class="bg-transparent hover:underline cursor-pointer text-white text-base p-1 mx-1 rounded"><a>Back</a></router-link>
           </div>
       </div>
@@ -133,6 +133,9 @@ export default {
       }
       this.proccessLeaveReaquest(temp);
       this.succesReject = true;
+    },
+    isUser(){
+      return this.getLeaveReaquest.id_employee == this.$cookies.get('local_login')
     }
   },
   watch:{
