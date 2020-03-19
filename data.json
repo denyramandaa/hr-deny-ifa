@@ -841,6 +841,16 @@
       ],
       "notes": "Coba ahh",
       "status": 1
+    },
+    {
+      "id": 16,
+      "name": "Shincan",
+      "id_employee": 1,
+      "leave_date": [
+        "2020-03-20"
+      ],
+      "notes": "heh hhh",
+      "status": 0
     }
   ],
   "data_applicant": [
