@@ -27,7 +27,7 @@
         <div class="flex flex-col md:flex-row">
           <div class="md:w-full shadow bg-gray-100 rounded m-4">
               <div class="p-4 bg-white rounded-t border-b text-center">Did you absent today?</div>
-              <div class="p-4" v-if="dataReady">
+              <div class="p-4" v-if="dataReady && !isNewUser">
                   <p class="text-center mb-4">Don't forget to absent oke</p>
                   <div class="flex justify-center items-center">
                     <div class="text-white cursor-pointer text-lg p-1 px-3 mx-1 rounded" :class="!hasClockIn ? 'bg-green-600' : 'bg-gray-300'" @click="clockIn()">Clock In</div>
@@ -40,6 +40,9 @@
                           <td class="px-4 py-2 border-b text-center">Today Clock Out : <br><span class="font-bold">{{ checkClock(hasClockOut) }}</span> WIB</td>
                       </tr>
                   </table>
+              </div>
+              <div class="p-8" v-if="isNewUser">
+                  <p class="text-center">You just added as New Employee today. You can do absent starting tommorow.</p>
               </div>
           </div>
           <div class="md:w-full shadow bg-gray-100 rounded m-4">
@@ -111,6 +114,12 @@ export default {
         getOutToday(){
             return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)
         },
+        isNewUser(){
+            if (this.attendanceList != '') {
+                console.log('atdd',this.attendanceList);
+                return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()).data.find(d=>d.id == this.$cookies.get('local_login')) === undefined ? true : false
+            }
+        }
     },
     methods:{
         ...mapActions({

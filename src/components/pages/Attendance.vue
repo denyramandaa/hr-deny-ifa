@@ -43,7 +43,7 @@ export default {
         ...mapGetters({
             employee: 'employee/employee',
             attendanceList: 'attendance/attendanceList'
-        }),
+        })
     },
     methods: {
         ...mapActions({
