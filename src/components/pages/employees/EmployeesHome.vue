@@ -103,10 +103,46 @@ export default {
             return this.employeeStatus.find(ob=>ob.id == a.status_employee) ? this.employeeStatus.find(ob=>ob.id == a.status_employee).status : ''
         },
         exportCsv(){
-            console.log('click');
+            let fix = []
+            for(let i=0;i<this.getEmployee.length;i++){
+                let temp = {
+                    no: i,
+                    name: this.getEmployee[i].name,
+                    email: this.getEmployee[i].email,
+                    phone: this.getEmployee[i].phone,
+                    gender: this.getEmployee[i].gender,
+                    birth_date: this.getEmployee[i].birth_date,
+                    birth_place: this.getEmployee[i].birth_place,
+                    position: this.getRoleJobPosition(this.getEmployee[i]),
+                    divition: this.getRoleJobDivition(this.getEmployee[i]),
+                    status_employee: this.getEmployeeStatus(this.getEmployee[i]),
+                    password: this.getEmployee[i].password,
+                }
+                fix.push(temp);
+            }
+            this.exportingProcess(fix);
         },
         exportAllCSV(){
-            const items = this.employee
+            let fix = []
+            for(let i=0;i<this.employee.length;i++){
+                let temp = {
+                    no: i,
+                    name: this.employee[i].name,
+                    email: this.employee[i].email,
+                    phone: this.employee[i].phone,
+                    gender: this.employee[i].gender,
+                    birth_date: this.employee[i].birth_date,
+                    birth_place: this.employee[i].birth_place,
+                    position: this.getRoleJobPosition(this.employee[i]),
+                    divition: this.getRoleJobDivition(this.employee[i]),
+                    status_employee: this.getEmployeeStatus(this.employee[i]),
+                    password: this.employee[i].password,
+                }
+                fix.push(temp);
+            }
+            this.exportingProcess(fix);
+        },
+        exportingProcess(items){
             const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
             const header = Object.keys(items[0])
             let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
@@ -124,7 +160,6 @@ export default {
             document.body.appendChild(dwldLink); 
             dwldLink.click(); 
             document.body.removeChild(dwldLink); 
-            console.log(csv)
         }
     },
     data(){

@@ -8,8 +8,8 @@
                 </li>
             </ul>
             <div class="flex justify-end items-center">
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV</div>
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV (All)</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportCsv()">Export CSV</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportAllCSV()">Export CSV (All)</div>
                 <router-link :to="{name: 'add_applicants'}" tag="div" class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-sm p-1 px-2 mx-1 rounded"><a>Add Applicants</a></router-link>
             </div>
 
@@ -116,6 +116,71 @@ export default {
     },
     checkingImg(item){
       return item.photo ? item.photo : '/src/assets/avatar.jpg'
+    },
+    getApplicantStatus(a){
+      if(!a) return 'unprocessed'
+      return a == 1 ? 'psyo test' : 'interview'
+    },
+    exportCsv(){
+        let fix = []
+        for(let i=0;i<this.getApplicant.length;i++){
+            let temp = {
+                no: i,
+                name: this.getApplicant[i].name,
+                apply_to: this.getRoleJobPosition(this.getApplicant[i])+' - '+this.getRoleJobDivition(this.getApplicant[i]),
+                email: this.getApplicant[i].email,
+                phone: this.getApplicant[i].phone,
+                gender: this.getApplicant[i].gender,
+                birth_date: this.getApplicant[i].birth_date,
+                birth_place: this.getApplicant[i].birth_place,
+                last_work: this.getApplicant[i].last_work,
+                last_education: this.getApplicant[i].last_education,
+                address: this.getApplicant[i].address,
+                status_applicant: this.getApplicantStatus(this.getApplicant[i].status_applicant)
+            }
+            fix.push(temp);
+        }
+        this.exportingProcess(fix);
+    },
+    exportAllCSV(){
+        let fix = []
+        for(let i=0;i<this.applicantList.length;i++){
+            let temp = {
+                no: i,
+                name: this.applicantList[i].name,
+                apply_to: this.getRoleJobPosition(this.applicantList[i])+' - '+this.getRoleJobDivition(this.applicantList[i]),
+                email: this.applicantList[i].email,
+                phone: this.applicantList[i].phone,
+                gender: this.applicantList[i].gender,
+                birth_date: this.applicantList[i].birth_date,
+                birth_place: this.applicantList[i].birth_place,
+                last_work: this.applicantList[i].last_work,
+                last_education: this.applicantList[i].last_education,
+                address: this.applicantList[i].address,
+                status_applicant: this.getApplicantStatus(this.applicantList[i].status_applicant)
+            }
+            fix.push(temp);
+        }
+        this.exportingProcess(fix);
+    },
+    exportingProcess(items){
+        const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+        const header = Object.keys(items[0])
+        let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+        csv.unshift(header.join(','))
+        csv = csv.join('\r\n')
+        let blob = new Blob(['\ufeff' + csv], { 
+        type: 'text/csv;charset=utf-8;'
+        }); 
+        let dwldLink = document.createElement("a"); 
+        let url = URL.createObjectURL(blob); 
+        navigator.userAgent.indexOf('Chrome') == -1; 
+        dwldLink.setAttribute("href", url); 
+        dwldLink.setAttribute("download", "alltable.csv"); 
+        dwldLink.style.visibility = "hidden"; 
+        document.body.appendChild(dwldLink); 
+        dwldLink.click(); 
+        document.body.removeChild(dwldLink); 
     }
   },
   async created(){

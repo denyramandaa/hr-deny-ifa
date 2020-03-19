@@ -8,8 +8,8 @@
                 </li>
             </ul>
             <div class="flex justify-end items-center">
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV</div>
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV (All)</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportCsv()">Export CSV</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportAllCSV()">Export CSV (All)</div>
                 <router-link :to="{name: 'add_leave_reaquest'}" tag="div" class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-sm p-1 px-2 mx-1 rounded"><a>Add Leave Reaquest</a></router-link>
             </div>
         </div>
@@ -133,10 +133,55 @@ export default {
             if(!a) return 'pending'
             return a == 1 ? 'approved' : 'rejected'
         },
-        // getTotalDays(d){
-        //     if(!d) return
-        //     return this.leaveReaquest.filter(ob=>ob.id === )
-        // }
+        exportCsv(){
+            let fix = []
+            for(let i=0;i<this.getLeaveReaquest.length;i++){
+                let temp = {
+                    no: i,
+                    name: this.getLeaveReaquest[i].name,
+                    leave_date: this.getLeaveReaquest[i].leave_date.toString(),
+                    total_days: this.getLeaveReaquest[i].leave_date.length,
+                    notes: this.getLeaveReaquest[i].notes,
+                    status: this.getStatusText(this.getLeaveReaquest[i].status),
+                }
+                fix.push(temp);
+            }
+            this.exportingProcess(fix);
+        },
+        exportAllCSV(){
+            let fix = []
+            for(let i=0;i<this.leaveReaquest.length;i++){
+                let temp = {
+                    no: i,
+                    name: this.leaveReaquest[i].name,
+                    leave_date: this.leaveReaquest[i].leave_date.toString(),
+                    total_days: this.leaveReaquest[i].leave_date.length,
+                    notes: this.leaveReaquest[i].notes,
+                    status: this.getStatusText(this.leaveReaquest[i].status),
+                }
+                fix.push(temp);
+            }
+            this.exportingProcess(fix);
+        },
+        exportingProcess(items){
+            const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+            const header = Object.keys(items[0])
+            let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+            csv.unshift(header.join(','))
+            csv = csv.join('\r\n')
+            let blob = new Blob(['\ufeff' + csv], { 
+            type: 'text/csv;charset=utf-8;'
+            }); 
+            let dwldLink = document.createElement("a"); 
+            let url = URL.createObjectURL(blob); 
+            navigator.userAgent.indexOf('Chrome') == -1; 
+            dwldLink.setAttribute("href", url); 
+            dwldLink.setAttribute("download", "alltable.csv"); 
+            dwldLink.style.visibility = "hidden"; 
+            document.body.appendChild(dwldLink); 
+            dwldLink.click(); 
+            document.body.removeChild(dwldLink); 
+        }
     },
     async created(){
         await this.fetchEmployees();
