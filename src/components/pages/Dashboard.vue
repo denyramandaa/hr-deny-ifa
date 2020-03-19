@@ -116,7 +116,6 @@ export default {
         },
         isNewUser(){
             if (this.attendanceList != '') {
-                console.log('atdd',this.attendanceList);
                 return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()).data.find(d=>d.id == this.$cookies.get('local_login')) === undefined ? true : false
             }
         }
