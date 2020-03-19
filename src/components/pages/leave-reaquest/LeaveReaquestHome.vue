@@ -175,8 +175,7 @@ export default {
             var html = document.querySelector("table").outerHTML;
             this.export_table_to_csv(html, "table.csv");
         },
-    },
-    exportAllCSV(){
+           exportAllCSV(){
 
             const items = this.employee
             const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
@@ -199,6 +198,8 @@ export default {
             console.log(csv)
           
     },
+    },
+ 
     async created(){
         await this.fetchEmployees();
         await this.fetchLeaveReaquest();

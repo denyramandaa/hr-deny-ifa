@@ -119,16 +119,8 @@ export default {
     },
     checkingImg(item){
       return item.photo ? item.photo : '/src/assets/avatar.jpg'
-    }
-  },
-  async created(){
-    await this.fetchApplicant();
-    await this.fetchRoleJob();
-  },
-  beforeRouteEnter (to, from, next) {
-    $cookies.get('local_login') ? next() : next({ name: 'login', query: { redirect: 'home' } })
-  },
-  download_csv(csv, filename) {
+    },
+    download_csv(csv, filename) {
             var csvFile;
             var downloadLink;
 
@@ -195,7 +187,16 @@ export default {
             dwldLink.click(); 
             document.body.removeChild(dwldLink); 
             console.log(csv)
-    },
+    }, 
+  },
+  async created(){
+    await this.fetchApplicant();
+    await this.fetchRoleJob();
+  },
+  beforeRouteEnter (to, from, next) {
+    $cookies.get('local_login') ? next() : next({ name: 'login', query: { redirect: 'home' } })
+  },
+  
     }
 
 </script>

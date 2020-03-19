@@ -106,6 +106,8 @@ export default {
             return this.employeeStatus.find(ob=>ob.id == a.status_employee) ? this.employeeStatus.find(ob=>ob.id == a.status_employee).status : ''
         
         },
+
+
         download_csv(csv, filename) {
             var csvFile;
             var downloadLink;
