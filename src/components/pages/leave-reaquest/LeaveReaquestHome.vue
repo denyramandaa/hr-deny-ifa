@@ -29,9 +29,10 @@
                     <tbody class="bg-white">
                         <tr>
                             <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Name</th>
-                            <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Notes</th>
                             <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Divition</th>
-                            <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Status</th>
+                            <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Notes</th>
+                            <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-left">Total Days</th>
+                            <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">Status</th>
                             <th class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center"></th>
                         </tr>
                         <tr class="hover:bg-gray-100" v-for="(item, idx) in getLeaveReaquest" :key="idx">
@@ -48,11 +49,14 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
+                                <div class="text-sm leading-5 text-gray-900 w-full block capitalize">{{ getRoleJobPosition(getEmployee(item)) }}</div>
+                                <div class="text-sm leading-5 text-gray-500 w-full block capitalize">{{ getRoleJobDivition(getEmployee(item)) }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-gray-500 w-full block normal-case">{{ item.notes }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
-                                <div class="text-sm leading-5 text-gray-900 w-full block capitalize">{{ getRoleJobPosition(getEmployee(item)) }}</div>
-                                <div class="text-sm leading-5 text-gray-500 w-full block capitalize">{{ getRoleJobDivition(getEmployee(item)) }}</div>
+                                <div class="text-sm leading-5 text-gray-900 w-full block normal-case text-center">{{ item.leave_date.length }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-center w-full block capitalize p-1 rounded text-white" :class="{ 'bg-gray-400': !item.status, 'bg-green-400': item.status == 1, 'bg-red-400': item.status == 2 }">{{ getStatusText(item.status  ) }}</div>
@@ -129,6 +133,10 @@ export default {
             if(!a) return 'pending'
             return a == 1 ? 'approved' : 'rejected'
         },
+        // getTotalDays(d){
+        //     if(!d) return
+        //     return this.leaveReaquest.filter(ob=>ob.id === )
+        // }
     },
     async created(){
         await this.fetchEmployees();
