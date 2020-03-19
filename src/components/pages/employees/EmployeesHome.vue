@@ -155,31 +155,26 @@ export default {
         },
         exportAllCSV(){
             const items = this.employee
-            console.log(items);
-            var rows = [];
-
-            for(let i = 0; i< items.length; i++){
-                let row = items[i].id+" , "+items[i].status_employee;
-                rows.push(row);
-            }
-            this.download_csv(csv.join("\n"), filename);
-        },
-        exportAllData(){
-        
-            this.exportAllCSV(html, "table.csv");
+            const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+            const header = Object.keys(items[0])
+            let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+            csv.unshift(header.join(','))
+            csv = csv.join('\r\n')
+            let blob = new Blob(['\ufeff' + csv], { 
+            type: 'text/csv;charset=utf-8;'
+            }); 
+            let dwldLink = document.createElement("a"); 
+            let url = URL.createObjectURL(blob); 
+            navigator.userAgent.indexOf('Chrome') == -1; 
+            dwldLink.setAttribute("href", url); 
+            dwldLink.setAttribute("download", "alltable.csv"); 
+            dwldLink.style.visibility = "hidden"; 
+            document.body.appendChild(dwldLink); 
+            dwldLink.click(); 
+            document.body.removeChild(dwldLink); 
+            console.log(csv)
         }
-
-        },           
-            // const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-            // const header = Object.keys(items[0])
-            // let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-            // csv.unshift(header.join(','))
-            // csv = csv.join('\r\n')
-            // this.export_table_to_csv(html, "table.csv");
-
-            // console.log(csv)
-    //     }
-    // },
+    },
     data(){
         return{
             activeIdx: 0,

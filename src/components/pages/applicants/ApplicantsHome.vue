@@ -9,7 +9,7 @@
             </ul>
             <div class="flex justify-end items-center">
                 <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportCSV()">Export CSV</div>
-                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded">Export CSV (All)</div>
+                <div class="bg-transparent hover:underline cursor-pointer text-white text-sm p-1 mx-1 rounded" @click="exportAllCSV()">Export CSV (All)</div>
                 <router-link :to="{name: 'add_applicants'}" tag="div" class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-sm p-1 px-2 mx-1 rounded"><a>Add Applicants</a></router-link>
             </div>
 
@@ -175,6 +175,27 @@ export default {
             var html = document.querySelector("table").outerHTML;
             this.export_table_to_csv(html, "table.csv");
         },
+        exportAllCSV(){
+            const items = this.employee
+            const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+            const header = Object.keys(items[0])
+            let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+            csv.unshift(header.join(','))
+            csv = csv.join('\r\n')
+            let blob = new Blob(['\ufeff' + csv], { 
+            type: 'text/csv;charset=utf-8;'
+            }); 
+            let dwldLink = document.createElement("a"); 
+            let url = URL.createObjectURL(blob); 
+            navigator.userAgent.indexOf('Chrome') == -1; 
+            dwldLink.setAttribute("href", url); 
+            dwldLink.setAttribute("download", "alltable.csv"); 
+            dwldLink.style.visibility = "hidden"; 
+            document.body.appendChild(dwldLink); 
+            dwldLink.click(); 
+            document.body.removeChild(dwldLink); 
+            console.log(csv)
+    },
     }
 
 </script>
