@@ -4,6 +4,7 @@ import "regenerator-runtime/runtime.js"
 
 import applicant from './modules/applicant'
 import attendance from './modules/attendance'
+import broadCast from './modules/broadcast'
 import employee from './modules/employee'
 import event from './modules/event'
 import leaveRequest from './modules/leaveRequest'
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
   modules: {
     applicant,
     attendance,
+    broadCast,
     employee,
     event,
     leaveRequest

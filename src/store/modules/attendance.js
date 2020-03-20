@@ -23,7 +23,7 @@ const actions = {
     const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d)
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
     const dt = ye+'-'+mo+'-'+da;
-    let last_id = (state.attendanceList[state.attendanceList.length-1].id);
+    let last_id = state.attendanceList.length>2 ? (state.attendanceList[state.attendanceList.length-1].id) : 0;
     for(let i=0;i<state.attendanceList.length;i++){
       let temp = { "id": state.attendanceList[i].id, "clock_in": "", "clock_out": "" }
       datas.push(temp);

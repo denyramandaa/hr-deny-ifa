@@ -675,6 +675,62 @@
         }
       ],
       "id": 15
+    },
+    {
+      "date": "2020-03-20",
+      "data": [
+        {
+          "id": 1,
+          "clock_in": "14:21:48",
+          "clock_out": ""
+        },
+        {
+          "id": 2,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 3,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 4,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 8,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 9,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 12,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 13,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 14,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 15,
+          "clock_in": "",
+          "clock_out": ""
+        }
+      ],
+      "id": 16
     }
   ],
   "data_leave_reaquest": [
@@ -899,6 +955,9 @@
       "address": "Binus, jalan keluarga",
       "status_applicant": 2
     }
+  ],
+  "data_broadcast":[
+    
   ],
   "date_event": [
     {

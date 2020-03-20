@@ -14,7 +14,8 @@ import LeaveReaquestHome from './components/pages/leave-reaquest/LeaveReaquestHo
 import LeaveReaquestAdd from './components/pages/leave-reaquest/LeaveReaquestAdd.vue';
 import LeaveReaquestDetail from './components/pages/leave-reaquest/LeaveReaquestDetail.vue';
 import Apply from './components/pages/Apply.vue';
-import Login from './components/pages/Login.vue'
+import Login from './components/pages/Login.vue';
+import Broadcast from './components/pages/Broadcast.vue'
 
 export const routes = [
   { path: '/', component: Dasboard, name: 'dashboard' },
@@ -36,6 +37,7 @@ export const routes = [
     { path: ':id/detail', component: LeaveReaquestDetail, name: 'detail_leave_reaquest' },
   ] },
   { path: '/apply', component: Apply, name: 'apply' },
+  { path: '/broadcast', component: Broadcast, name: 'broadcast' },
   { path: '/login', component: Login, name: 'login' },
   { path: '*', redirect: '/', name: 'redirect'},
 ];

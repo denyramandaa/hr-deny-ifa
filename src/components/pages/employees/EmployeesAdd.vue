@@ -136,7 +136,7 @@ export default {
             fetchEmployeeStatus : 'employee/fetchEmployeeStatus'
         }),
         add(){
-            let last_id = (this.employee[this.employee.length-1].id) ? (this.employee[this.employee.length-1].id) : 0;
+            let last_id = (this.employee.length>2) ? (this.employee[this.employee.length-1].id) : 0;
             let new_user = {
                 "id" : parseInt(last_id)+1,
                 "role_job" : parseInt(this.role_jobs),
