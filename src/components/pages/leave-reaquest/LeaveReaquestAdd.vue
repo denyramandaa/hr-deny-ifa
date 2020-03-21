@@ -15,7 +15,7 @@
                       <div class="w-2/4">
                           <div class="w-full mb-2">
                               <p class="mb-2 text-gray-600">Notes</p>
-                              <textarea type="tel" placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="3" v-model="notes"></textarea>
+                              <textarea placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="3" v-model="notes"></textarea>
                           </div>
                       </div>
                       <div class="w-2/4 ml-10">

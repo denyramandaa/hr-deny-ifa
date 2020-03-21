@@ -731,6 +731,67 @@
         }
       ],
       "id": 16
+    },
+    {
+      "id": 17,
+      "date": "2020-03-21",
+      "data": [
+        {
+          "id": 1,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 2,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 3,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 4,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 8,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 9,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 12,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 13,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 14,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 15,
+          "clock_in": "",
+          "clock_out": ""
+        },
+        {
+          "id": 16,
+          "clock_in": "",
+          "clock_out": ""
+        }
+      ]
     }
   ],
   "data_leave_reaquest": [
@@ -956,8 +1017,67 @@
       "status_applicant": 2
     }
   ],
-  "data_broadcast":[
-    
+  "data_broadcast": [
+    {
+      "id": 1,
+      "broadcaster": 1,
+      "title": "asdsd sd",
+      "message": "dsada\ndsds\n\n\ndsd\n\n\ndsdd",
+      "label": "#3182ce",
+      "date": "21 Mar, 16:26",
+      "viewer": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": 2,
+      "broadcaster": 1,
+      "title": "ddad",
+      "message": "jh\n\ndddd",
+      "label": "#3182ce",
+      "date": "21 Mar, 16:52",
+      "viewer": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": 3,
+      "broadcaster": 1,
+      "title": "dsdd dddd",
+      "message": "dasd",
+      "label": "#3182ce",
+      "date": "21 Mar, 16:53",
+      "viewer": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        12,
+        13,
+        14,
+        15
+      ]
+    }
   ],
   "date_event": [
     {

@@ -39,3 +39,7 @@ body{
 .fade-enter, .fade-leave-to {
     opacity: 0
 }
+.notif-panel{
+    width: 300px;
+    max-height: 250px;
+}

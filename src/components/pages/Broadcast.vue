@@ -11,16 +11,19 @@
             <div class="shadow relative">
               <h1 class="py-4 px-10 border-b font-bold text-gray-700 rounded-t bg-white">Make a Broadcast</h1>
               <div class="min-w-full rounded-b bg-gray-100 px-10 pt-5 pb-8 border-t border-white">
-                  <div class="flex">
-                      <div class="w-full">
-                          <div class="flex justify-between">
-                            <p class="mb-2 text-gray-600">Broadcast Message</p>
-                            <div class="mb-2 text-gray-600">
-                              Label Color: <input class="bg-gray-100" type="color" v-model="color">
-                            </div>
-                          </div>
-                          <textarea type="tel" placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="12" v-model="message"></textarea>
-                      </div>
+                  <div class="w-full">
+                    <div class="mb-6 flex">
+                      <p class="text-gray-600 pr-2">Label</p>
+                      <input class="bg-gray-100" type="color" v-model="color">
+                    </div>
+                    <div class="w-full mb-6">
+                        <p class="mb-2 text-gray-600">Title</p>
+                        <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="title">
+                    </div>
+                    <div class="mb-6">
+                      <p class="mb-1 text-gray-600">Message</p>
+                      <textarea placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="12" v-model="message"></textarea>
+                    </div>
                   </div>
               </div>
               <transition name="fade">
@@ -40,6 +43,7 @@ export default {
   data(){
     return{
       color: "#3182ce",
+      title: "",
       message: "",
       addSuccess: false,
       addError: false
@@ -57,7 +61,8 @@ export default {
             let self = this;
             setTimeout(function(){
                 self.addSuccess = false;
-                self.$router.push({ name: 'dashboard' });
+                self.title = "";
+                self.message = "";
             },1500);
         }
     },
@@ -76,41 +81,48 @@ export default {
       fetchBroadCast : 'broadCast/fetchBroadCast',
       fetchEmployees : 'employee/fetchEmployees',
     }),
+    dateFormatting(){
+        let d = new Date();
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const dt = new Date(d);
+        const dy = dt.getDate();
+        const mn = months[dt.getMonth()];
+        const yr = dt.getFullYear();
+        return dy+' '+mn
+    },
+    addZero(i) {
+        if (i < 10) i = "0" + i;
+        return i;
+    },
+    getHoursNow(){
+        let d = new Date();
+        let h = this.addZero(d.getHours());
+        let m = this.addZero(d.getMinutes());
+        let s = this.addZero(d.getSeconds());
+        return h + ":" + m
+    },
     add(){
-      console.log(this.message, this.color)
       let emp = [];
       for(let i=0;i<this.employee.length;i++){
-        emp.push(this.employee[i].id);
+        if(this.employee[i].id != this.$cookies.get('local_login')) emp.push(this.employee[i].id);
       }
       let last_id = (this.broadCast.length>2) ? (this.broadCast[this.broadCast.length-1].id) : 0;
+      let dateNow = this.dateFormatting() + ', ' + this.getHoursNow();
       let fix = {
         id: last_id,
+        broadcaster: parseInt(this.$cookies.get('local_login')),
+        title: this.title,
         message: this.message,
         label: this.color,
+        date: dateNow,
         viewer: emp
       }
-      console.log(fix)
-      // {
-      //   "id": 1,
-      //   "message": "wiwk wkwk dasdasda daskdasdad",
-      //   "label": "",
-      //   "viewed_by": []
-      // }
-      // let last_id = (this.leaveReaquest[this.leaveReaquest.length-1].id) ? (this.leaveReaquest[this.leaveReaquest.length-1].id) : 0;
-      // if(this.notes){
-      //   let temp = {
-      //     id : parseInt(last_id)+1,
-      //     name: this.getEmployeeName,
-      //     id_employee: parseInt(this.$cookies.get('local_login')),
-      //     leave_date: this.data_leave,
-      //     notes: this.notes,
-      //     status: 0
-      //   }
-      //   this.addSuccess = true;
-      //   this.addLeaveReaquest(temp)
-      // }else{
-      //   this.addError = true;
-      // }
+      if(this.title && this.message){
+        this.addSuccess = true;
+        this.addBroadCast(fix)
+      }else{
+        this.addError = true;
+      }
     }
   },
   async created() {
