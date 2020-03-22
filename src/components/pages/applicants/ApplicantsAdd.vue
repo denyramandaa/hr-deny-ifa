@@ -140,7 +140,7 @@ export default {
             fetchRoleJob : 'employee/fetchRoleJob',
         }),
         add(){
-            let last_id = (this.applicantList[this.applicantList.length-1].id) ? (this.applicantList[this.applicantList.length-1].id) : 0;
+            let last_id = this.applicantList.length>0 ? (this.applicantList[this.applicantList.length-1].id) : 0;
             let new_user = {
                 "id": parseInt(last_id)+1,
                 "apply_to": parseInt(this.apply_to),

@@ -52,7 +52,7 @@
                                 <div class="text-sm leading-5 text-gray-900 w-full block capitalize">{{ getRoleJobPosition(getEmployee(item)) }}</div>
                                 <div class="text-sm leading-5 text-gray-500 w-full block capitalize">{{ getRoleJobDivition(getEmployee(item)) }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">
+                            <td class="px-6 py-4 whitespace-pre-wrap border-b border-gray-200" v-if="getEmployee(item)">
                                 <div class="text-sm leading-5 text-gray-500 w-full block normal-case">{{ item.notes }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" v-if="getEmployee(item)">

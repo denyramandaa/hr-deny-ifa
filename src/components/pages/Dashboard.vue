@@ -115,7 +115,7 @@ export default {
             return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)
         },
         isNewUser(){
-            if (this.attendanceList != '') {
+            if (this.attendanceList.length>0) {
                 return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()).data.find(d=>d.id == this.$cookies.get('local_login')) === undefined ? true : false
             }
         }
