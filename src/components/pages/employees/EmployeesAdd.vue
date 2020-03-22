@@ -36,7 +36,7 @@
                             <p class="mb-2 text-gray-600">Upload Foto</p>
                             <div class="flex">
                                 <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
-                                <div class="bg-cover w-3/5 bg-center" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
+                                <div class="bg-cover bg-center" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
                             </div>
                           </div>
                       </div>

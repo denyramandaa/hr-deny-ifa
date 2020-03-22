@@ -45,13 +45,7 @@
                             <p class="mb-2 text-gray-600">Upload Foto</p>
                             <div class="flex">
                                 <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)">
-                                <div class="bg-cover w-3/5" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
-                            </div>
-                          </div>
-                          <div class="w-full mb-6">
-                            <p class="mb-2 text-gray-600">Upload PDF</p>
-                            <div class="flex">
-                                <input class="w-2/5 block" type="file" accept="application/pdf" @change="uploadPDF($event)">
+                                <div class="bg-cover bg-center" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
                             </div>
                           </div>
                       </div>
@@ -72,10 +66,16 @@
                               <p class="mb-2 text-gray-600">Last Eduction</p>
                               <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="last_education">
                           </div>
-                            <div class="w-full mb-2">
+                            <div class="w-full mb-6">
                                 <p class="mb-2 text-gray-600">Address</p>
                                 <textarea type="tel" placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="3" v-model="address"></textarea>
                             </div>
+                          <div class="w-full mb-2">
+                            <p class="mb-2 text-gray-600">Upload PDF</p>
+                            <div class="flex">
+                                <input class="w-2/5 block" type="file" accept="application/pdf" @change="uploadPDF($event)">
+                            </div>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -164,7 +164,7 @@ export default {
                 "address": this.address,
                 "status_applicant": 0
             }
-            if(this.name != '' && this.email != '' && this.phone != '' && this.birth_place != '' && this.photo != '' && this.last_education != '' && this.last_company != '' && this.address != ''){
+            if(this.name != '' && this.email != '' && this.phone != '' && this.birth_place != '' && this.photo != '' && this.last_education != '' && this.last_company != '' && this.address != '' && this.pdf != ''){
                 this.addSuccess = true;
                 this.addApplicant(new_user);
             }else{
