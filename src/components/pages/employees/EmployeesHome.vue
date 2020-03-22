@@ -102,45 +102,31 @@ export default {
         getEmployeeStatus(a){
             return this.employeeStatus.find(ob=>ob.id == a.status_employee) ? this.employeeStatus.find(ob=>ob.id == a.status_employee).status : ''
         },
-        exportCsv(){
+        prepareCsvData(a){
             let fix = []
-            for(let i=0;i<this.getEmployee.length;i++){
+            for(let i=0;i<a.length;i++){
                 let temp = {
-                    no: i,
-                    name: this.getEmployee[i].name,
-                    email: this.getEmployee[i].email,
-                    phone: this.getEmployee[i].phone,
-                    gender: this.getEmployee[i].gender,
-                    birth_date: this.getEmployee[i].birth_date,
-                    birth_place: this.getEmployee[i].birth_place,
-                    position: this.getRoleJobPosition(this.getEmployee[i]),
-                    divition: this.getRoleJobDivition(this.getEmployee[i]),
-                    status_employee: this.getEmployeeStatus(this.getEmployee[i]),
-                    password: this.getEmployee[i].password,
+                    no: i+1,
+                    name: a[i].name,
+                    email: a[i].email,
+                    phone: a[i].phone,
+                    gender: a[i].gender,
+                    birth_date: a[i].birth_date,
+                    birth_place: a[i].birth_place,
+                    position: this.getRoleJobPosition(a[i]),
+                    divition: this.getRoleJobDivition(a[i]),
+                    status_employee: this.getEmployeeStatus(a[i]),
+                    password: a[i].password,
                 }
                 fix.push(temp);
             }
-            this.exportingProcess(fix);
+            return fix;
+        },
+        exportCsv(){
+            this.exportingProcess(this.prepareCsvData(this.getEmployee));
         },
         exportAllCSV(){
-            let fix = []
-            for(let i=0;i<this.employee.length;i++){
-                let temp = {
-                    no: i,
-                    name: this.employee[i].name,
-                    email: this.employee[i].email,
-                    phone: this.employee[i].phone,
-                    gender: this.employee[i].gender,
-                    birth_date: this.employee[i].birth_date,
-                    birth_place: this.employee[i].birth_place,
-                    position: this.getRoleJobPosition(this.employee[i]),
-                    divition: this.getRoleJobDivition(this.employee[i]),
-                    status_employee: this.getEmployeeStatus(this.employee[i]),
-                    password: this.employee[i].password,
-                }
-                fix.push(temp);
-            }
-            this.exportingProcess(fix);
+            this.exportingProcess(this.prepareCsvData(this.employee));
         },
         exportingProcess(items){
             const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here

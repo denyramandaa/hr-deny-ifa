@@ -121,47 +121,32 @@ export default {
       if(!a) return 'unprocessed'
       return a == 1 ? 'psyo test' : 'interview'
     },
-    exportCsv(){
+    prepareCsvData(a){
         let fix = []
-        for(let i=0;i<this.getApplicant.length;i++){
+        for(let i=0;i<a.length;i++){
             let temp = {
-                no: i,
-                name: this.getApplicant[i].name,
-                apply_to: this.getRoleJobPosition(this.getApplicant[i])+' - '+this.getRoleJobDivition(this.getApplicant[i]),
-                email: this.getApplicant[i].email,
-                phone: this.getApplicant[i].phone,
-                gender: this.getApplicant[i].gender,
-                birth_date: this.getApplicant[i].birth_date,
-                birth_place: this.getApplicant[i].birth_place,
-                last_work: this.getApplicant[i].last_work,
-                last_education: this.getApplicant[i].last_education,
-                address: this.getApplicant[i].address,
-                status_applicant: this.getApplicantStatus(this.getApplicant[i].status_applicant)
+                no: i+1,
+                name: a[i].name,
+                apply_to: this.getRoleJobPosition(a[i])+' - '+this.getRoleJobDivition(a[i]),
+                email: a[i].email,
+                phone: a[i].phone,
+                gender: a[i].gender,
+                birth_date: a[i].birth_date,
+                birth_place: a[i].birth_place,
+                last_work: a[i].last_work,
+                last_education: a[i].last_education,
+                address: a[i].address,
+                status_applicant: this.getApplicantStatus(a[i].status_applicant)
             }
             fix.push(temp);
         }
-        this.exportingProcess(fix);
+        return fix;
+    },
+    exportCsv(){
+        this.exportingProcess(this.prepareCsvData(this.getApplicant));
     },
     exportAllCSV(){
-        let fix = []
-        for(let i=0;i<this.applicantList.length;i++){
-            let temp = {
-                no: i,
-                name: this.applicantList[i].name,
-                apply_to: this.getRoleJobPosition(this.applicantList[i])+' - '+this.getRoleJobDivition(this.applicantList[i]),
-                email: this.applicantList[i].email,
-                phone: this.applicantList[i].phone,
-                gender: this.applicantList[i].gender,
-                birth_date: this.applicantList[i].birth_date,
-                birth_place: this.applicantList[i].birth_place,
-                last_work: this.applicantList[i].last_work,
-                last_education: this.applicantList[i].last_education,
-                address: this.applicantList[i].address,
-                status_applicant: this.getApplicantStatus(this.applicantList[i].status_applicant)
-            }
-            fix.push(temp);
-        }
-        this.exportingProcess(fix);
+        this.exportingProcess(this.prepareCsvData(this.applicantList));
     },
     exportingProcess(items){
         const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here

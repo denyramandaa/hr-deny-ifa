@@ -133,35 +133,26 @@ export default {
             if(!a) return 'pending'
             return a == 1 ? 'approved' : 'rejected'
         },
-        exportCsv(){
+        prepareCsvData(a){
             let fix = []
-            for(let i=0;i<this.getLeaveReaquest.length;i++){
+            for(let i=0;i<a.length;i++){
                 let temp = {
-                    no: i,
-                    name: this.getLeaveReaquest[i].name,
-                    leave_date: this.getLeaveReaquest[i].leave_date.toString(),
-                    total_days: this.getLeaveReaquest[i].leave_date.length,
-                    notes: this.getLeaveReaquest[i].notes,
-                    status: this.getStatusText(this.getLeaveReaquest[i].status),
+                    no: i+1,
+                    name: a[i].name,
+                    leave_date: a[i].leave_date.toString(),
+                    total_days: a[i].leave_date.length,
+                    notes: a[i].notes,
+                    status: this.getStatusText(a[i].status),
                 }
                 fix.push(temp);
             }
-            this.exportingProcess(fix);
+            return fix;
+        },
+        exportCsv(){
+            this.exportingProcess(this.prepareCsvData(this.getLeaveReaquest));
         },
         exportAllCSV(){
-            let fix = []
-            for(let i=0;i<this.leaveReaquest.length;i++){
-                let temp = {
-                    no: i,
-                    name: this.leaveReaquest[i].name,
-                    leave_date: this.leaveReaquest[i].leave_date.toString(),
-                    total_days: this.leaveReaquest[i].leave_date.length,
-                    notes: this.leaveReaquest[i].notes,
-                    status: this.getStatusText(this.leaveReaquest[i].status),
-                }
-                fix.push(temp);
-            }
-            this.exportingProcess(fix);
+            this.exportingProcess(this.prepareCsvData(this.leaveReaquest));
         },
         exportingProcess(items){
             const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here

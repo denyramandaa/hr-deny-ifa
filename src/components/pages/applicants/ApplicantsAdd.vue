@@ -171,27 +171,22 @@ export default {
                 this.addError = true;
             }
         },
-        uploadImage(event) {
-            let filesSelected = event.target.files;
+        processingFile(a, b){
+            let filesSelected = a.target.files;
             let fileToLoad = filesSelected[0];
             let fileReader = new FileReader();
             let sef = this;
-            fileReader.onload = function(fileLoadedEvent) 
-            {
-                sef.photo = fileLoadedEvent.target.result;
+            fileReader.onload = function(fileLoadedEvent){
+                if(b == 'photo') sef.photo = fileLoadedEvent.target.result;
+                if(b == 'pdf') sef.pdf = fileLoadedEvent.target.result;
             };
             fileReader.readAsDataURL(fileToLoad);
         },
+        uploadImage(event) {
+            this.processingFile(event, 'photo');
+        },
         uploadPDF(event) {
-            let filesSelected = event.target.files;
-            let fileToLoad = filesSelected[0];
-            let fileReader = new FileReader();
-            let sef = this;
-            fileReader.onload = function(fileLoadedEvent) 
-            {
-                sef.pdf = fileLoadedEvent.target.result;
-            };
-            fileReader.readAsDataURL(fileToLoad);
+            this.processingFile(event, 'pdf');
         }
     },
     async created(){
