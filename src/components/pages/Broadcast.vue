@@ -106,10 +106,10 @@ export default {
       for(let i=0;i<this.employee.length;i++){
         if(this.employee[i].id != this.$cookies.get('local_login')) emp.push(this.employee[i].id);
       }
-      let last_id = (this.broadCast.length>2) ? (this.broadCast[this.broadCast.length-1].id) : 0;
+      let last_id = this.broadCast ? (this.broadCast[this.broadCast.length-1].id) : 0;
       let dateNow = this.dateFormatting() + ', ' + this.getHoursNow();
       let fix = {
-        id: last_id,
+        id: parseInt(last_id)+1,
         broadcaster: parseInt(this.$cookies.get('local_login')),
         title: this.title,
         message: this.message,
@@ -117,6 +117,8 @@ export default {
         date: dateNow,
         viewer: emp
       }
+      console.log(this.broadCast[this.broadCast.length-1].id)
+      console.log(fix)
       if(this.title && this.message){
         this.addSuccess = true;
         this.addBroadCast(fix)

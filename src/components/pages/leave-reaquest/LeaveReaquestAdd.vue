@@ -87,7 +87,7 @@ export default {
       fetchEmployees : 'employee/fetchEmployees',
     }),
     add(){
-      let last_id = (this.leaveReaquest.length>2) ? (this.leaveReaquest[this.leaveReaquest.length-1].id) : 0;
+      let last_id = this.leaveReaquest ? (this.leaveReaquest[this.leaveReaquest.length-1].id) : 0;
       if(this.notes){
         this.data_leave = [];
         for(let i=0;i<this.days;i++){
