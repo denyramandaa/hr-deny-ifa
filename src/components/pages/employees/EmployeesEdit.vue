@@ -34,7 +34,7 @@
                                   <input type="radio" name="gender" value="female" v-model="gender" :checked="gender == 'female'"><span class="ml-1">Female</span></label>
                           </div>
                           <div class="w-full mb-6">
-                            <p class="mb-2 text-gray-600">Upload Foto</p>
+                            <p class="mb-2 text-gray-600">Upload Photo</p>
                             <div class="flex">
                                 <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
                                 <div class="bg-cover w-3/5 bg-center" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + checkImgShow(photo) + ')' }"></div>
@@ -43,11 +43,11 @@
                       </div>
                       <div class="w-2/4 ml-10">
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth date</p>
+                              <p class="mb-2 text-gray-600">Birth Date</p>
                               <input type="date" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="birth_date">
                           </div>
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth place</p>
+                              <p class="mb-2 text-gray-600">Birth Place</p>
                               <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 capitalize" v-model="birth_place">
                           </div>
                           <div class="w-full mb-6">

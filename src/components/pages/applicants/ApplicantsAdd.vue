@@ -42,7 +42,7 @@
                                   <input type="radio" name="gender" value="female" v-model="gender"><span class="ml-1">Female</span></label>
                           </div>
                           <div class="w-full mb-6">
-                            <p class="mb-2 text-gray-600">Upload Foto</p>
+                            <p class="mb-2 text-gray-600">Upload Photo</p>
                             <div class="flex">
                                 <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)">
                                 <div class="bg-cover bg-center" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
@@ -51,11 +51,11 @@
                       </div>
                       <div class="w-2/4 ml-10">
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth date</p>
+                              <p class="mb-2 text-gray-600">Birth Date</p>
                               <input type="date" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="birth_date">
                           </div>
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth place</p>
+                              <p class="mb-2 text-gray-600">Birth Place</p>
                               <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="birth_place">
                           </div>
                           <div class="w-full mb-6">
@@ -71,9 +71,10 @@
                                 <textarea type="tel" placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="3" v-model="address"></textarea>
                             </div>
                           <div class="w-full mb-2">
-                            <p class="mb-2 text-gray-600">Upload PDF</p>
+                            <p class="mb-2 text-gray-600">Upload CV (pdf)</p>
                             <div class="flex">
                                 <input class="w-2/5 block" type="file" accept="application/pdf" @change="uploadPDF($event)">
+                                <div class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-base p-1 px-2 rounded" @click="viewCv( pdf )" v-if="pdf">Preview File</div>
                             </div>
                           </div>
                       </div>
@@ -146,6 +147,12 @@ export default {
             fetchApplicant : 'applicant/fetchApplicant',
             fetchRoleJob : 'employee/fetchRoleJob',
         }),
+        viewCv(a){
+            let pdfWindow = window.open("")
+            pdfWindow.document.write(
+                "<iframe width='100%' height='100%' src="+ a +"></iframe>"
+            )
+        },
         add(){
             let last_id = this.applicantList.length>0 ? (this.applicantList[this.applicantList.length-1].id) : 0;
             let new_user = {

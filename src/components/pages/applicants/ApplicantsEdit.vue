@@ -42,8 +42,8 @@
                                   <input type="radio" name="gender" value="female" v-model="gender"><span class="ml-1">Female</span></label>
                           </div>
                           <div class="w-full mb-6">
-                            <p class="mb-2 text-gray-600">Upload Foto</p>
-                            <div class="flex">
+                            <p class="mb-2 text-gray-600">Upload New Photo</p>
+                            <div class="flex text-transparent">
                                 <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
                                 <div class="bg-cover w-3/5" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
                             </div>
@@ -51,11 +51,11 @@
                       </div>
                       <div class="w-2/4 ml-10">
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth date</p>
+                              <p class="mb-2 text-gray-600">Birth Date</p>
                               <input type="date" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="birth_date">
                           </div>
                           <div class="w-full mb-6">
-                              <p class="mb-2 text-gray-600">Birth place</p>
+                              <p class="mb-2 text-gray-600">Birth Place</p>
                               <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="birth_place">
                           </div>
                           <div class="w-full mb-6">
@@ -66,10 +66,17 @@
                               <p class="mb-2 text-gray-600">Last Eduction</p>
                               <input type="text" placeholder="" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="last_education">
                           </div>
-                            <div class="w-full mb-2">
+                            <div class="w-full mb-6">
                                 <p class="mb-2 text-gray-600">Address</p>
                                 <textarea type="tel" placeholder="" required="required" class="block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="3" v-model="address"></textarea>
                             </div>
+                          <div class="w-full mb-2">
+                            <p class="mb-2 text-gray-600">Upload New CV (pdf)</p>
+                            <div class="flex text-transparent">
+                                <input class="w-2/5 block" type="file" accept="application/pdf" @change="uploadPDF($event)">
+                                <div class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-base p-1 px-2 rounded" @click="viewCv( pdf )">View current CV</div>
+                            </div>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -103,6 +110,7 @@ export default {
             birth_place: '',
             apply_to: 0,
             photo: '',
+            pdf: '',
             last_work: '',
             last_education: '',
             address: '',
@@ -157,6 +165,7 @@ export default {
                 "birth_date" : this.birth_date,
                 "birth_place" : this.birth_place,
                 "photo" : this.photo,
+                "cv": this.pdf,
                 "last_work": this.last_work,
                 "last_education": this.last_education,
                 "address": this.address,
@@ -169,6 +178,12 @@ export default {
                 this.addError = true;
             }
         },
+        viewCv(a){
+            let pdfWindow = window.open("")
+            pdfWindow.document.write(
+                "<iframe width='100%' height='100%' src="+ a +"></iframe>"
+            )
+        },
         initEditVal(){
             if(!this.getTheUser) return;
             this.apply_to = this.getTheUser.apply_to
@@ -179,21 +194,28 @@ export default {
             this.birth_date = this.getTheUser.birth_date
             this.birth_place = this.getTheUser.birth_place
             this.photo = this.getTheUser.photo ? this.getTheUser.photo : '/src/assets/avatar.jpg'
+            this.pdf = this.getTheUser.cv,
             this.last_work = this.getTheUser.last_work
             this.last_education = this.getTheUser.last_education
             this.address = this.getTheUser.address
             this.status_applicant = this.getTheUser.status_applicant
         },
-        uploadImage(event) {
-            let filesSelected = event.target.files;
+        processingFile(a, b){
+            let filesSelected = a.target.files;
             let fileToLoad = filesSelected[0];
             let fileReader = new FileReader();
             let sef = this;
-            fileReader.onload = function(fileLoadedEvent) 
-            {
-                sef.photo = fileLoadedEvent.target.result;
+            fileReader.onload = function(fileLoadedEvent){
+                if(b == 'photo') sef.photo = fileLoadedEvent.target.result;
+                if(b == 'pdf') sef.pdf = fileLoadedEvent.target.result;
             };
             fileReader.readAsDataURL(fileToLoad);
+        },
+        uploadImage(event) {
+            this.processingFile(event, 'photo');
+        },
+        uploadPDF(event) {
+            this.processingFile(event, 'pdf');
         }
     },
     async created(){

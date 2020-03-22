@@ -13,6 +13,7 @@
 						<div class="relative inline-block">
               <div class="text-gray-600 focus:outline-none cursor-pointer" @click="show = !show"><i class="fas fa-user-circle pr-0 md:pr-1 text-gray-200"></i> <span class="text-gray-200 capitalize">Hi, {{ getUser }}</span> <svg class="h-3 inline" style="fill: #fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg></div>
               <div class="absolute bg-gray-900 text-white right-0 mt-3 p-3 overflow-auto z-30 w-40" :class="{ invisible: !show }">
+                  <!-- <router-link :to="{name: 'edit_employees', params: { id: $cookies.get('local_login') }}" tag="a" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block cursor-pointer"><i class="fas fa-cog fa-fw"></i> Settings</router-link> -->
                   <div class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block cursor-pointer" @click="logOut()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</div>
               </div>
 						</div>
@@ -28,7 +29,8 @@
   export default{
     data(){
       return{
-        show: false
+        show: false,
+        id: ''
       }
     },
     computed:{
@@ -50,6 +52,7 @@
     },
     async created() {
       await this.fetchEmployees();
+      this.id = this.$cookies.get('local_login');
       console.log('header', this.employee);
     },
   }

@@ -102,8 +102,7 @@ export default {
             return this.employee.filter(ob=>ob.gender === 'male').length
         },
         getUpcomingEvent(){
-            let today = new Date();
-            return this.dateEvent.filter(ob=>parseInt(this.fixedDate(ob)) >= parseInt(this.dateToString(today)))
+            return this.dateEvent.filter(ob=>parseInt(this.fixedDate(ob)) >= parseInt(this.dateToString()))
         },
         getSelfAttd(){
             return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()) ? this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()).data.find(d=>d.id == this.$cookies.get('local_login')) : '';
@@ -115,12 +114,18 @@ export default {
             return this.leaveReaquest.filter(ob=>ob.leave_date.includes(this.dateLegalFormat()) && ob.status === 1)
         },
         isNewUser(){
-            console.log(this.attendanceList);
-            if (this.attendanceList.length>0) {
-                console.log('sip anjeng');
+            if (this.attendanceList.length>0 && this.attendanceList.find(ob=>ob.date === this.dateLegalFormat())) {
                 return this.attendanceList.find(ob=>ob.date === this.dateLegalFormat()).data.find(d=>d.id == this.$cookies.get('local_login')) === undefined ? true : false
             }
-        }
+        },
+        intlDateTimeFormat(){
+            let d = new Date();
+            return [
+                new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d),
+                new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d),
+                new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+            ]
+        },
     },
     methods:{
         ...mapActions({
@@ -136,25 +141,13 @@ export default {
         dateFormatting(d){
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const dt = new Date(d);
-            const dy = dt.getDate();
-            const mn = months[dt.getMonth()];
-            const yr = dt.getFullYear();
-            return dy+' '+mn+' '+yr
+            return dt.getDate()+' '+months[dt.getMonth()]+' '+dt.getFullYear()
         },
-        dateToString(d){
-            const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
-            const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d)
-            const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
-            const dt = `${ye}${mo}${da}`;
-            return dt;
+        dateToString(){
+            return `${this.intlDateTimeFormat[0]}${this.intlDateTimeFormat[1]}${this.intlDateTimeFormat[2]}`;
         },
         dateLegalFormat(){
-            let d = new Date();
-            const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
-            const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d)
-            const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
-            const dt = ye+'-'+mo+'-'+da;
-            return dt;
+            return this.intlDateTimeFormat[0]+'-'+this.intlDateTimeFormat[1]+'-'+this.intlDateTimeFormat[2];
         },
         fixedDate(d){
             return d.date.split("-").join("");

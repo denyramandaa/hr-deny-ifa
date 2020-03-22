@@ -733,13 +733,12 @@
       ]
     },
     {
-      "id": 17,
       "date": "2020-03-23",
       "data": [
         {
           "id": 1,
-          "clock_in": "",
-          "clock_out": ""
+          "clock_in": "01:07:33",
+          "clock_out": "02:04:44"
         },
         {
           "id": 2,
@@ -791,7 +790,8 @@
           "clock_in": "",
           "clock_out": ""
         }
-      ]
+      ],
+      "id": 17
     }
   ],
   "data_leave_reaquest": [
