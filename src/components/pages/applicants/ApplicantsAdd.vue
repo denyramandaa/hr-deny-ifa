@@ -44,8 +44,14 @@
                           <div class="w-full mb-6">
                             <p class="mb-2 text-gray-600">Upload Foto</p>
                             <div class="flex">
-                                <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
+                                <input class="w-2/5 block" type="file" accept="image/*" @change="uploadImage($event)">
                                 <div class="bg-cover w-3/5" style="height: 120px; width: 120px" :style="{ 'background-image': 'url(' + photo + ')' }" v-if="photo"></div>
+                            </div>
+                          </div>
+                          <div class="w-full mb-6">
+                            <p class="mb-2 text-gray-600">Upload PDF</p>
+                            <div class="flex">
+                                <input class="w-2/5 block" type="file" accept="application/pdf" @change="uploadPDF($event)">
                             </div>
                           </div>
                       </div>
@@ -102,6 +108,7 @@ export default {
             birth_place: '',
             apply_to: 0,
             photo: '',
+            pdf: '',
             last_company: '',
             last_education: '',
             address: ''
@@ -151,6 +158,7 @@ export default {
                 "birth_date" : this.birth_date,
                 "birth_place" : this.birth_place,
                 "photo" : this.photo,
+                "cv" : this.pdf,
                 "last_work": this.last_company,
                 "last_education": this.last_education,
                 "address": this.address,
@@ -171,6 +179,17 @@ export default {
             fileReader.onload = function(fileLoadedEvent) 
             {
                 sef.photo = fileLoadedEvent.target.result;
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        },
+        uploadPDF(event) {
+            let filesSelected = event.target.files;
+            let fileToLoad = filesSelected[0];
+            let fileReader = new FileReader();
+            let sef = this;
+            fileReader.onload = function(fileLoadedEvent) 
+            {
+                sef.pdf = fileLoadedEvent.target.result;
             };
             fileReader.readAsDataURL(fileToLoad);
         }

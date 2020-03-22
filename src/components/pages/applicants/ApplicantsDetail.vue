@@ -97,6 +97,14 @@
                   <span class="w-3/5 normal-case">{{ getApplicantDetail.address }}</span>
                 </div>
 
+                <div class="pt-5 text-base flex items-center justify-center lg:justify-start">
+                  <div class="w-2/6">
+                    <i class="fas fa-map-marked-alt mr-2"></i>CV
+                  </div>
+                  <span class="w-1/12">:</span>
+                  <div class="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer text-base p-1 px-2 rounded" @click="viewCv( getApplicantDetail.cv )">View CV</div>
+                </div>
+
                 <div class="mx-auto lg:mx-0 w-4/5 pt-4 border-b-2 border-blue-600 opacity-25"></div>
 
                 <p class="pt-8 text-base flex items-center justify-center lg:justify-start"><i class="fas fa-stamp mr-2"></i>Last Process : <span class="font-bold ml-1 capitalize">{{ getStatusText(getApplicantDetail.status_applicant) }}</span></p>
@@ -141,6 +149,12 @@ export default {
       deleteApplicant: 'applicant/deleteApplicant',
       proccessApplicant: 'applicant/proccessApplicant'
     }),
+    viewCv(a){
+      let pdfWindow = window.open("")
+      pdfWindow.document.write(
+          "<iframe width='100%' height='100%' src="+ a +"></iframe>"
+      )
+    },
     getRoleJobPosition(d){
         return this.roleJob.find(ob=>ob.id === d.apply_to) ? this.roleJob.find(ob=>ob.id === d.apply_to).position : ''
     },
