@@ -15,8 +15,9 @@ const actions = {
     let data = await axios.get('http://localhost:3000/data_attendance');
     commit('fetchAttendanceList', data.data)
   },
-  async addAttendance({state, dispatch}){
+  async addAttendance({state, dispatch, rootState}){
     await dispatch('fetchAttendanceList');
+    await dispatch('employee/fetchEmployees');
     let datas = [];
     let d = new Date();
     const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
@@ -24,10 +25,11 @@ const actions = {
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
     const dt = ye+'-'+mo+'-'+da;
     let last_id = state.attendanceList.length>0 ? (state.attendanceList[state.attendanceList.length-1].id) : 0;
-    for(let i=0;i<state.attendanceList.length;i++){
-      let temp = { "id": state.attendanceList[i].id, "clock_in": "", "clock_out": "" }
+    for(let i=0;i<rootState.employee.employee.length;i++){
+      let temp = { "id": rootState.employee.employee[i].id, "clock_in": "", "clock_out": "" }
       datas.push(temp);
     }
+    console.log('dt', datas)
     let fix = { 
       "id": last_id+1,
       "date": dt,
