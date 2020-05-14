@@ -5,14 +5,15 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-orange-100" id="email" type="text" placeholder="Email" v-model="user.email" :class="{ 'border-red-600' : loginError }">
             </div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-orange-100" id="password" type="password" placeholder="Password" v-model="user.password" :class="{ 'border-red-600' : loginError }">
                 <p class="text-red-600 text-xs italic text-center" v-if="loginError">Account is not found</p>
             </div>
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center mb-4">
                 <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">Sign In</button>
             </div>
+            <router-link :to="{name: 'apply'}" tag="div" class="flex items-center justify-center"><a class="inline-block align-baseline font-bold text-sm text-gray-600 hover:text-gray-800">Want to join our company? Apply here!</a></router-link>
         </form>
     </div>
 </template>
